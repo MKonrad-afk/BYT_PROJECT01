@@ -17,18 +17,27 @@ namespace Tut2_s20123
 
 namespace Tut2_s20123
 {
-    public class Cube(double side) : IShape
+    public class Cube : IShape
     {
-        private readonly double side = side;
+        private readonly double _side;
+
+        public Cube(double side)
+        {
+            if (side < 0)
+            {
+                throw new ArgumentException("side argument must be greater than or equal to 0.");
+            }
+            _side = side;
+        }
 
         public double CalculateArea()
         {
-            return 6 * Math.Pow(side, 2);
+            return 6 * Math.Pow(_side, 2);
         }
 
         public double CalculateVolume()
         {
-            return Math.Pow(side, 3);
+            return Math.Pow(_side, 3);
         }
 
     }

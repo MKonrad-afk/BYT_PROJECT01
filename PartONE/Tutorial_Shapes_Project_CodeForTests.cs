@@ -140,4 +140,40 @@ namespace Tut2_s20123_Tests
             Assert.That(()=> new Rectangle(-1, 0), Throws.TypeOf<ArgumentException>() );
         }
     }
+
+    internal class Tests_Cube
+    {
+        private readonly IShape cube = new Cube(4);
+        private readonly IShape cube0 = new Cube(0);
+
+        [Test]
+        public void TestCube_Area()
+        {
+            Assert.That(cube.CalculateArea(), Is.EqualTo(96).Within(0.001));
+        }
+
+        [Test]
+        public void TestCube_Volume()
+        {
+            Assert.That(cube.CalculateVolume(), Is.EqualTo(64).Within(0.001));
+        }
+
+        [Test]
+        public void TestCube_Volume_ZeroSide_ReturnsZero()
+        {
+            Assert.That(cube0.CalculateVolume(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestCube_Area_ZeroSide_ReturnsZero()
+        {
+            Assert.That(cube0.CalculateArea(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestCube_Creation_NegativeSide_PopError()
+        {
+            Assert.That(()=> new Cube(-1), Throws.TypeOf<ArgumentException>());
+        }
+    }
 }
