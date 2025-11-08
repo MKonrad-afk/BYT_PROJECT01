@@ -61,19 +61,42 @@ namespace Tut2_s20123
 
 namespace Tut2_s20123
 {
-    public class Cylinder(double radius, double height) : IShape
+    public class Cylinder : IShape
     {
-        private readonly double radius = radius;
-        private readonly double height = height;
+        private readonly double _radius;
+        private readonly double _height;
+        
+        public Cylinder(double radius, double height)
+        {
+            if (radius < 0 || height < 0)
+                throw new ArgumentException("Radius and height must be non-negative.");
+
+            _radius = radius;
+            _height = height;
+        }
 
         public double CalculateArea()
         {
-            return 2 * Math.PI * radius * (radius + height);
+            if (_radius ==  0 || _height == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 2 * Math.PI * _radius * (_radius + _height);
+            }
         }
 
         public double CalculateVolume()
         {
-            return Math.PI * Math.Pow(radius, 2) * height;
+            if (_radius ==  0 || _height == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return Math.PI * Math.Pow(_radius, 2) * _height;
+            }
         }
 
     }
@@ -82,18 +105,25 @@ namespace Tut2_s20123
 
 namespace Tut2_s20123
 {
-    public class Sphere(double radius) : IShape
+    public class Sphere : IShape
     {
-        private readonly double radius = radius;
+        private readonly double _radius;
 
+        public Sphere(double radius)
+        {
+            if (radius < 0)
+                throw new ArgumentException("Radius cannot be negative.", nameof(radius));
+
+            _radius = radius;
+        }
         public double CalculateArea()
         {
-            return 4 * Math.PI * Math.Pow(radius, 2);
+            return 4 * Math.PI * Math.Pow(_radius, 2);
         }
 
         public double CalculateVolume()
         {
-            return (4.0 / 3.0) * Math.PI * Math.Pow(radius, 3);
+            return (4.0 / 3.0) * Math.PI * Math.Pow(_radius, 3);
         }
     }
 }
