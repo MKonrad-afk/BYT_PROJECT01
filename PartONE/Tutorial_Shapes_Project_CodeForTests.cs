@@ -3,8 +3,9 @@ using Tut2_s20123;
 
 namespace Tut2_s20123_Tests
 {
-    internal class Tests
+    internal class Tests_Sphere
     {
+        //Sphare
         private readonly IShape sphere = new Sphere(5);
         private readonly IShape sphere0 = new Sphere(0);
         
@@ -37,8 +38,14 @@ namespace Tut2_s20123_Tests
         [Test]
         public void TestSphereCreation_NegativeRadius_PopError()
         {
-        Assert.That(() => new Sphere(-1), Throws.TypeOf<ArgumentException>());        }
+        Assert.That(() => new Sphere(-1), Throws.TypeOf<ArgumentException>());
+        }
         
+    }
+
+    internal class Tests_Cylinder
+    {
+        //Cylinder
         private readonly IShape cyl = new Cylinder(3, 7);
         private readonly IShape cyl0R = new Cylinder(0, 10);
         private readonly IShape cyl0H = new Cylinder(5, 0);
@@ -89,6 +96,48 @@ namespace Tut2_s20123_Tests
         public void TestCylinder_Creation_NegativeRadius_PopError()
         {
             Assert.That(() => new Cylinder(0, -1), Throws.TypeOf<ArgumentException>());
+        }
+    }
+
+    internal class Tests_Recatngle
+    {
+        private readonly IShape rec = new Rectangle(4, 8);
+        private readonly IShape rec0L = new Rectangle(0, 8);
+        private readonly IShape rec0W = new Rectangle(4, 0);
+
+        [Test]
+        public void TestRecatngle_Area()
+        {
+            Assert.That(rec.CalculateArea(), Is.EqualTo(32));
+        }
+
+        [Test]
+        public void TestRecatngle_Volume_Zero()
+        {
+            Assert.That(rec.CalculateVolume(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestRecatngle_Area_ZeroLength_ReturnsZero()
+        {
+            Assert.That(rec0L.CalculateArea(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestRectangle_Area_ZeroWidth_ReturnsZero()
+        {
+            Assert.That(rec0W.CalculateArea(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestRecatangle_Creation_NegativeWidth_PopError()
+        {
+            Assert.That(()=> new Rectangle(0, -1), Throws.TypeOf<ArgumentException>() );
+        } 
+        [Test]
+        public void TestRecatangle_Creation_NegativeLength_PopError()
+        {
+            Assert.That(()=> new Rectangle(-1, 0), Throws.TypeOf<ArgumentException>() );
         }
     }
 }

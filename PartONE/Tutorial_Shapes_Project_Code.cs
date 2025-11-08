@@ -38,14 +38,24 @@ namespace Tut2_s20123
 
 namespace Tut2_s20123
 {
-    public class Rectangle(double length, double width) : IShape
+    public class Rectangle: IShape
     {
-        private readonly double length = length;
-        private readonly double width = width;
+        private readonly double _length;
+        private readonly double _width;
 
+        public Rectangle(double length, double width)
+        {
+            if (length < 0 || width < 0)
+            {
+                throw new ArgumentException("Length and Width are required to be non-negative");
+            }
+            
+            _length = length;
+            _width = width;
+        }
         public double CalculateArea()
         {
-            return length * width;
+            return _length * _width;
         }
 
         public double CalculateVolume()
